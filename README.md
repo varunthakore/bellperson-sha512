@@ -1,4 +1,4 @@
-# bellperson-sha512
+# Bellperson-SHA512
 
 ## References
 1. [Bellperson implementation of SHA256](https://github.com/filecoin-project/bellperson/blob/master/src/gadgets/sha256.rs)
