@@ -377,7 +377,7 @@ mod test {
             })
             .collect();
 
-        sha512_compression_function(cs.namespace(|| "sha256"), &input_bits, &iv).unwrap();
+        sha512_compression_function(cs.namespace(|| "sha512"), &input_bits, &iv).unwrap();
 
         assert!(cs.is_satisfied());
         println!("Number of constraints: {}", cs.num_constraints());
@@ -405,7 +405,7 @@ mod test {
             })
             .collect();
 
-        sha512(cs.namespace(|| "sha256"), &input_bits).unwrap();
+        sha512(cs.namespace(|| "sha512"), &input_bits).unwrap();
 
         assert!(cs.is_satisfied());
         println!("Number of constraints: {}", cs.num_constraints());
