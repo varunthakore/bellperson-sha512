@@ -99,7 +99,7 @@ fn get_sha512_iv() -> Vec<UInt64> {
     IV.iter().map(|&v| UInt64::constant(v)).collect()
 }
 
-fn sha512_compression_function<Scalar, CS>(
+pub fn sha512_compression_function<Scalar, CS>(
     cs: CS,
     input: &[Boolean],
     current_hash_value: &[UInt64],
@@ -308,7 +308,7 @@ mod test {
 
     #[test]
     #[allow(clippy::needless_collect)]
-    fn test_blank_hash() {
+    fn test_hash() {
 
         let mut h = Sha512::new();
         let data: Vec<u8> = vec![10];
