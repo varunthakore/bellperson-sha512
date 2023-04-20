@@ -2,6 +2,14 @@
 name = "bellperson-sha512"
 version = "0.1.0"
 edition = "2021"
+authors = "Varun Thakore <vrnthakore@gmail.com>"
+description = "circuit for SHA-512 hash function"
+documentation = "https://docs.rs/bellperson-sha512"
+homepage = "https://github.com/varunthakore/bellperson-sha512"
+license = "MIT/Apache-2.0"
+repository = "https://github.com/varunthakore/bellperson-sha512"
+readme = "README.md"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
