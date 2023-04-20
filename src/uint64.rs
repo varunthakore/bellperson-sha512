@@ -1,3 +1,6 @@
+//! Circuit representation of a [`u64`], with helpers for the [`sha512`]
+//! gadgets.
+
 use ff::PrimeField;
 use bellperson::{
     gadgets::{
