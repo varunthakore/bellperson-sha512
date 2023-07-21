@@ -294,11 +294,9 @@ where
 #[cfg(test)]
 mod test {
     use super::*;
-    use bellperson::{
-        gadgets::{
-            boolean::AllocatedBit,
-            test::TestConstraintSystem,
-        },
+    use bellperson::gadgets::{
+        boolean::AllocatedBit,
+        test::TestConstraintSystem,
     };
     use blstrs::Scalar as Fr;
     use rand_core::{RngCore, SeedableRng};
