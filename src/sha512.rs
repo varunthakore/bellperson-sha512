@@ -3,18 +3,12 @@
 //!
 //! [SHA-512]: https://tools.ietf.org/html/rfc6234
 
-#![allow(clippy::many_single_char_names)]
+// #![allow(clippy::many_single_char_names)]
 
 use ff::PrimeField;
-use bellperson::{
-    gadgets::{
-        boolean::Boolean,
-        multieq::MultiEq,
-    },
-    ConstraintSystem, SynthesisError,
-};
+use bellpepper::gadgets::multieq::MultiEq;
+use bellpepper_core::{boolean::Boolean, ConstraintSystem, SynthesisError};
 use super::uint64::UInt64;
-
 
 
 // Constants copied from https://github.com/RustCrypto/hashes/blob/master/sha2/src/consts.rs
@@ -294,15 +288,14 @@ where
 #[cfg(test)]
 mod test {
     use super::*;
-    use bellperson::gadgets::{
+    use bellpepper_core::{
         boolean::AllocatedBit,
-        test::TestConstraintSystem,
+        test_cs::TestConstraintSystem,
     };
     use blstrs::Scalar as Fr;
     use rand::Rng;
     use rand_core::{RngCore, SeedableRng};
     use rand_xorshift::XorShiftRng;
-    // use hex_literal::hex;
     use sha2::{Sha512, Digest};
 
     #[test]

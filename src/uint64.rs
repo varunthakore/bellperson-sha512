@@ -2,13 +2,8 @@
 //! gadgets.
 
 use ff::PrimeField;
-use bellperson::{
-    gadgets::{
-        boolean::{AllocatedBit, Boolean},
-        multieq::MultiEq,
-    },
-    LinearCombination, ConstraintSystem, SynthesisError,
-};
+use bellpepper::gadgets::multieq::MultiEq;
+use bellpepper_core::{boolean::{AllocatedBit, Boolean}, LinearCombination, ConstraintSystem, SynthesisError};
 
 /// Represents an interpretation of 64 `Boolean` objects as an
 /// unsigned integer.
@@ -37,7 +32,7 @@ impl UInt64 {
         }
 
         UInt64 { 
-            bits: bits, 
+            bits, 
             value: Some(value),
         }
     }
@@ -418,14 +413,8 @@ impl UInt64 {
 #[cfg(test)]
 mod test {
     use super::UInt64;
-    use bellperson::{
-        gadgets::{
-            boolean::Boolean,
-            multieq::MultiEq,
-            test::*,
-        },
-        ConstraintSystem,
-    };
+    use bellpepper::gadgets::multieq::MultiEq;
+    use bellpepper_core::{boolean::Boolean, test_cs::TestConstraintSystem, ConstraintSystem};
 
     use blstrs::Scalar as Fr;
     use ff::Field;
