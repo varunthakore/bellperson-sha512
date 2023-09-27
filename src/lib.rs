@@ -1,2 +1,2 @@
-pub mod uint64;
 pub mod sha512;
+pub mod uint64;

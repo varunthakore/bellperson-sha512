@@ -1,9 +1,12 @@
 //! Circuit representation of a [`u64`], with helpers for the [`sha512`]
 //! gadgets.
 
-use ff::PrimeField;
 use bellpepper::gadgets::multieq::MultiEq;
-use bellpepper_core::{boolean::{AllocatedBit, Boolean}, LinearCombination, ConstraintSystem, SynthesisError};
+use bellpepper_core::{
+    boolean::{AllocatedBit, Boolean},
+    ConstraintSystem, LinearCombination, SynthesisError,
+};
+use ff::PrimeField;
 
 /// Represents an interpretation of 64 `Boolean` objects as an
 /// unsigned integer.
@@ -15,7 +18,6 @@ pub struct UInt64 {
 }
 
 impl UInt64 {
-
     /// Construct a constant `UInt64` from a `u64`
     pub fn constant(value: u64) -> Self {
         let mut bits = Vec::with_capacity(64);
@@ -31,8 +33,8 @@ impl UInt64 {
             tmp >>= 1;
         }
 
-        UInt64 { 
-            bits, 
+        UInt64 {
+            bits,
             value: Some(value),
         }
     }
@@ -406,9 +408,7 @@ impl UInt64 {
             value: modular_value,
         })
     }
-
 }
-
 
 #[cfg(test)]
 mod test {
@@ -490,7 +490,6 @@ mod test {
             }
         }
     }
-
 
     #[test]
     fn test_uint64_xor() {
@@ -580,7 +579,6 @@ mod test {
         }
     }
 
-
     #[test]
     #[allow(clippy::many_single_char_names)]
     fn test_uint64_addmany() {
@@ -639,7 +637,6 @@ mod test {
         }
     }
 
-
     #[test]
     fn test_uint64_rotr() {
         let mut rng = XorShiftRng::from_seed([
@@ -673,7 +670,6 @@ mod test {
         }
     }
 
-
     #[test]
     fn test_uint64_shr() {
         let mut rng = XorShiftRng::from_seed([
@@ -696,7 +692,6 @@ mod test {
             }
         }
     }
-
 
     #[test]
     fn test_uint64_sha512_maj() {
@@ -742,7 +737,6 @@ mod test {
         }
     }
 
-
     #[test]
     fn test_uint64_sha512_ch() {
         let mut rng = XorShiftRng::from_seed([
@@ -786,5 +780,4 @@ mod test {
             }
         }
     }
-
 }
