@@ -299,36 +299,30 @@ mod test {
         test::TestConstraintSystem,
     };
     use blstrs::Scalar as Fr;
+    use rand::Rng;
     use rand_core::{RngCore, SeedableRng};
     use rand_xorshift::XorShiftRng;
-    use hex_literal::hex;
+    // use hex_literal::hex;
     use sha2::{Sha512, Digest};
 
     #[test]
     #[allow(clippy::needless_collect)]
     fn test_hash() {
-
+        let length: u8 = rand::thread_rng().gen();
         let mut h = Sha512::new();
-        let data: Vec<u8> = vec![10];
+        let data: Vec<u8> = (0..length).map(|_| rand::thread_rng().gen()).collect();
         h.update(&data);
         let hash_result = h.finalize();
 
-        println!("this is hash {:?}", hash_result);
-
-        // This is hash of 10 represented in hex i.e. sha512(A) since 10 is A in hex.
-        // https://emn178.github.io/online-tools/sha512.html 
-        println!("hex is {:?}", hex!("be688838ca8686e5c90689bf2ab585cef1137c999b48c70b92f67a5c34dc15697b5d11c982ed6d71be1e1e7f7b4e0733884aa97c3f7a339a8ed03577cf74be09"));
-
-        // let iv = get_sha512_iv();
         let mut cs = TestConstraintSystem::<Fr>::new();
         let mut input_bits = vec![];
 
         for (byte_i, input_byte) in data.into_iter().enumerate() {
             for bit_i in (0..8).rev() {
-                let cs = cs.namespace(|| format!("input bit {} {}", byte_i, bit_i));
-
                 input_bits.push(
-                    AllocatedBit::alloc(cs, Some((input_byte >> bit_i) & 1u8 == 1u8))
+                    AllocatedBit::alloc(cs.namespace(|| format!("input bit {} {}", byte_i, bit_i)), 
+                        Some((input_byte >> bit_i) & 1u8 == 1u8)
+                    )
                         .unwrap()
                         .into(),
                 );
@@ -362,7 +356,6 @@ mod test {
         let iv = get_sha512_iv();
 
         let mut cs = TestConstraintSystem::<Fr>::new();
-        println!("Number of constraints: {}", cs.num_constraints());
         let input_bits: Vec<_> = (0..1024)
             .map(|i| {
                 Boolean::from(
@@ -378,7 +371,7 @@ mod test {
         sha512_compression_function(cs.namespace(|| "sha512"), &input_bits, &iv).unwrap();
 
         assert!(cs.is_satisfied());
-        println!("Number of constraints: {}", cs.num_constraints());
+        assert_eq!(67123, cs.num_constraints());
     }
 
 
@@ -390,7 +383,6 @@ mod test {
         ]);
 
         let mut cs = TestConstraintSystem::<Fr>::new();
-        println!("Number of constraints: {}", cs.num_constraints());
         let input_bits: Vec<_> = (0..1024)
             .map(|i| {
                 Boolean::from(
@@ -406,7 +398,7 @@ mod test {
         sha512(cs.namespace(|| "sha512"), &input_bits).unwrap();
 
         assert!(cs.is_satisfied());
-        println!("Number of constraints: {}", cs.num_constraints());
+        assert_eq!(114129, cs.num_constraints());
     }
 
 
