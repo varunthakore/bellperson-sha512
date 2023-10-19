@@ -6,7 +6,7 @@ This project was part of the submission for [ZK MOOC Hackathon](https://zk-hacki
 
 ## References
 1. [Bellman implementation of SHA256](https://github.com/zkcrypto/bellman/blob/main/src/gadgets/sha256.rs)
-2. [SHA-512 Hashing Algorithm](https://www.brainkart.com/article/Secure-Hash-Algorithm-(SHA)_8450/)
+2. [FIPS 180-4 : SHA-512](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf)
 
 ## License
 
